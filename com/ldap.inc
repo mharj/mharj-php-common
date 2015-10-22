@@ -54,14 +54,14 @@ class Ldap {
 	public function persist(LdapEntry $entry) {
 		try { // modify entry
 			$modifyts = new LdapSearch($entry->getDn(),"objectclass=*",array("modifytimestamp"));
-			if ($entry->modifytimestamp[0] !=  $this->search($modifyts)->getIterator()->current()->modifytimestamp[0] ) {
+			if ( $entry->modifytimestamp[0] != $this->search($modifyts)->getIterator()->current()->modifytimestamp[0] ) {
 				throw new LdapException("Entry was changed already");
 			}
 			$this->modReplace($entry->getDn(),$entry->getUpdateData());
 			// update TS from LDAP
 			$entry->modifytimestamp[0] = $this->search($modifyts)->getIterator()->current()->modifytimestamp[0];
 		} catch( LdapNotFoundException $ex) {
-			// TODO create entry
+			// TODO: create entry
 		}
 	}
 	
