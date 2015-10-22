@@ -1,2 +1,2 @@
 # mharj-php-common
-php common base class
+php common base support classes
